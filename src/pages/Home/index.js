@@ -1,11 +1,11 @@
 import React from 'react';
-import Main from './components/Main'
-import dadosIniciais from './data/dados_iniciais.json'
-import BannerMain from './components/BannerMain'
-import Carousel from './components/Carousel'
-import Footer from './components/Footer'
+import Main from '../../components/Main'
+import dadosIniciais from '../../data/dados_iniciais.json'
+import BannerMain from '../../components/BannerMain'
+import Carousel from '../../components/Carousel'
+import Footer from '../../components/Footer'
 
-function App() {
+function Home() {
   return (
     <div style={{background: '#141414'}}>
       <Main />
@@ -30,7 +30,15 @@ function App() {
       />
 
       <Carousel 
-        category={dadosIniciais.categorias[2]}
+        category={dadosIniciais.categorias[3]}
+      />
+
+      <Carousel 
+        category={dadosIniciais.categorias[4]}
+      />
+
+      <Carousel 
+        category={dadosIniciais.categorias[5]}
       />
     
       <Footer />
@@ -38,4 +46,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;
