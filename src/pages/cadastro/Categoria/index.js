@@ -35,8 +35,8 @@ export default function Categoria() {
     console.log('ola');
     const URL = 'http://localhost:8080/categoria'
     fetch(URL)
-    .then(async response => {
-      const resp = response.json()
+    .then(async (response) => {
+      const resp = await response.json()
       setCategories([
         ...resp,
       ])
