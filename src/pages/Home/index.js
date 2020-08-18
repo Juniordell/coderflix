@@ -1,15 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Menu from '../../components/Menu'
-import dadosIniciais from '../../data/dados_iniciais.json'
+// import dadosIniciais from '../../data/dados_iniciais.json'
 import BannerMain from '../../components/BannerMain'
 import Carousel from '../../components/Carousel'
 import Footer from '../../components/Footer'
+import categoriasRepositories from '../../repositories/categorias'
+import { useState } from 'react';
 
 function Home() {
+
+  const [initialData, setInitialData] = useState({
+    categorias: []
+  })
+
+  useEffect(() => {
+
+    categoriasRepositories.getAllWithVideos()
+      .then(categoriasComVideo => setInitialData(categoriasComVideo))
+      .catch(err => console.log(err.message))
+
+  }, [])
+
   return (
     <div style={{background: '#141414'}}>
       <Menu />
 
+      { JSON.stringify(initialData) }
+{/* 
       <BannerMain 
         videoTitle={dadosIniciais.categorias[0].videos[0].titulo}
         url={dadosIniciais.categorias[0].videos[0].url}
@@ -39,7 +56,7 @@ function Home() {
 
       <Carousel 
         category={dadosIniciais.categorias[5]}
-      />
+      /> */}
     
       <Footer />
     </div>

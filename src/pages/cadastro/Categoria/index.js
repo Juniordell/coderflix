@@ -4,6 +4,7 @@ import PageDefault from '../../../components/PageDefault'
 import Button from '../../../components/Button'
 import FormField from '../../../components/FormField'
 import { Link } from 'react-router-dom'
+import useForm from '../../../hooks/useForm'
 
 export default function Categoria() {
   const initialValues = {
@@ -14,26 +15,22 @@ export default function Categoria() {
   }
 
   const [categories, setCategories] = useState([])
-  const [values, setValues] = useState(initialValues)
 
   function handleSubmit(event) {
     event.preventDefault()
 
     setCategories([...categories, values])
-    setValues(initialValues)
+    clearForm(initialValues)
   }
 
-  function setValue(key, value) {
-    setValues({ ...values, [key]: value })
-  }
-
-  function handleChange(event) {
-    setValue(event.target.getAttribute('name'), event.target.value)
-  }
+  const { handleChange, values, clearForm } = useForm(initialValues)
 
   useEffect(() => {
     console.log('ola');
-    const URL = 'http://localhost:8080/categoria'
+    const URL = window.location.hostname.includes('localhost')
+      ? 'http://localhost:3000'
+      : 'https://coderflix.herokuapp.com/categoria'
+      
     fetch(URL)
     .then(async (response) => {
       const resp = await response.json()
@@ -86,7 +83,7 @@ export default function Categoria() {
 
       <ul>
         {categories.map((category, index) => {
-          return <li key={index}>{category.name}</li>
+          return <li key={index}>{category.titulo}</li>
         })}
       </ul>
 
